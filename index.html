@@ -3,88 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Rifki - Data & Business Analyst</title>
+    <title>Muhammad Rifki - Data Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- RESET & VARIABLES --- */
         :root {
-            --primary: #2563eb; /* Biru Profesional */
-            --secondary: #1e293b; /* Dark Blue Gray */
-            --accent: #3b82f6;
-            --bg: #f8fafc;
-            --text: #334155;
+            --primary: #2563eb; /* Biru Utama */
+            --secondary: #0f172a; /* Dark Blue buat background hero */
+            --text-dark: #334155;
             --text-light: #64748b;
             --white: #ffffff;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --bg-light: #f8fafc;
+            --accent: #3b82f6;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* --- LAYOUT UTILITIES --- */
+        /* --- LAYOUT --- */
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 60px 0; }
-        .section-title { font-size: 2rem; color: var(--secondary); margin-bottom: 40px; text-align: center; font-weight: 700; position: relative; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary); margin: 10px auto 0; border-radius: 2px; }
+        section { padding: 70px 0; }
+        .section-title { font-size: 2rem; color: var(--secondary); margin-bottom: 40px; text-align: center; font-weight: 800; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 5px; background: var(--primary); margin: 10px auto 0; border-radius: 5px; }
 
-        /* --- HEADER & HERO --- */
-        header { background: var(--white); box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; }
+        /* --- NAVBAR --- */
+        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         nav { display: flex; justify-content: space-between; align-items: center; height: 70px; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { font-weight: 500; color: var(--secondary); }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { font-weight: 600; color: var(--text-dark); font-size: 0.95rem; }
         .nav-links a:hover { color: var(--primary); }
 
-        .hero { background: linear-gradient(135deg, var(--secondary), #0f172a); color: var(--white); text-align: center; padding: 100px 20px; }
-        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
-        .hero p { font-size: 1.25rem; color: #cbd5e1; max-width: 600px; margin: 0 auto 30px; }
-        .btn { display: inline-block; padding: 12px 30px; background: var(--primary); color: var(--white); border-radius: 5px; font-weight: 600; border: 2px solid var(--primary); }
-        .btn:hover { background: transparent; color: var(--primary); border-color: var(--primary); background: var(--white); }
-        .btn-outline { background: transparent; border: 2px solid var(--white); margin-left: 10px; }
-        .btn-outline:hover { background: var(--white); color: var(--secondary); }
-
-        /* --- ABOUT --- */
-        .about-content { display: flex; flex-direction: column; gap: 20px; text-align: justify; color: var(--text-light); }
+        /* --- HERO SECTION (REVISI) --- */
+        .hero { background: linear-gradient(135deg, var(--secondary), #1e293b); color: var(--white); text-align: center; padding: 120px 20px; }
         
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #bfdbfe;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 15px; font-weight: 800; letter-spacing: -1px; }
+        .hero p { font-size: 1.25rem; color: #cbd5e1; max-width: 700px; margin: 0 auto 40px; }
+        
+        .btn { display: inline-block; padding: 12px 30px; background: var(--primary); color: var(--white); border-radius: 8px; font-weight: 600; border: 2px solid var(--primary); }
+        .btn:hover { background: var(--white); color: var(--primary); border-color: var(--white); transform: translateY(-3px); }
+        .btn-outline { background: transparent; border: 2px solid rgba(255,255,255,0.3); margin-left: 10px; }
+        .btn-outline:hover { border-color: var(--white); background: var(--white); color: var(--secondary); }
+
         /* --- SKILLS --- */
         .skills-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-        .skill-tag { background: var(--white); padding: 10px 20px; border-radius: 50px; box-shadow: var(--shadow); font-weight: 500; color: var(--secondary); border: 1px solid #e2e8f0; }
-        .skill-tag:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); transition: 0.3s; }
+        .skill-tag { background: var(--white); padding: 10px 25px; border-radius: 50px; border: 1px solid #e2e8f0; font-weight: 600; color: var(--text-dark); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .skill-tag:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); }
 
-        /* --- PROJECTS (GRID) --- */
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .project-card { background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform 0.3s; }
-        .project-card:hover { transform: translateY(-5px); }
-        .project-img { height: 180px; background-color: #cbd5e1; object-fit: cover; width: 100%; } /* Placeholder color if img fails */
-        .project-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .project-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: var(--secondary); }
-        .project-desc { font-size: 0.95rem; color: var(--text-light); margin-bottom: 15px; flex-grow: 1; }
-        .tech-stack { font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 15px; }
-        .project-links { display: flex; gap: 10px; margin-top: auto; }
-        .link-btn { flex: 1; text-align: center; padding: 8px; border: 1px solid var(--primary); border-radius: 5px; color: var(--primary); font-size: 0.9rem; font-weight: 600; }
-        .link-btn:hover { background: var(--primary); color: var(--white); }
+        /* --- PROJECTS & THESIS --- */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; border: 1px solid #f1f5f9; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card-img { height: 200px; background-color: #cbd5e1; object-fit: cover; width: 100%; }
+        .card-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: var(--secondary); }
+        .card-subtitle { font-size: 0.85rem; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 0.5px; }
+        .card-desc { font-size: 0.95rem; color: var(--text-light); margin-bottom: 20px; flex-grow: 1; }
+        
+        .btn-group { display: flex; gap: 10px; margin-top: auto; }
+        .btn-sm { flex: 1; text-align: center; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); background: #f8fafc; }
+        .btn-sm:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+        .btn-primary-sm { background: var(--primary); color: var(--white); border-color: var(--primary); }
 
-        /* --- EXPERIENCE (TIMELINE) --- */
-        .timeline { border-left: 3px solid #e2e8f0; margin-left: 20px; padding-left: 30px; }
+        /* --- TIMELINE (EXPERIENCE & ORG) --- */
+        .timeline { position: relative; border-left: 3px solid #e2e8f0; margin-left: 10px; padding-left: 30px; }
         .timeline-item { position: relative; margin-bottom: 40px; }
-        .timeline-item::before { content: ''; position: absolute; left: -39px; top: 5px; width: 16px; height: 16px; background: var(--primary); border-radius: 50%; border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--primary); }
-        .role { font-size: 1.2rem; font-weight: 700; color: var(--secondary); }
-        .company { font-size: 1rem; color: var(--primary); font-weight: 600; margin-bottom: 5px; }
-        .date { font-size: 0.9rem; color: #94a3b8; font-style: italic; margin-bottom: 10px; }
-        .timeline-desc li { margin-bottom: 8px; color: var(--text-light); font-size: 0.95rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -38px; top: 6px; width: 14px; height: 14px; background: var(--primary); border-radius: 50%; border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--primary); }
+        .timeline-role { font-size: 1.2rem; font-weight: 700; color: var(--secondary); }
+        .timeline-place { font-size: 1rem; color: var(--primary); font-weight: 600; margin-bottom: 4px; }
+        .timeline-date { font-size: 0.85rem; color: #94a3b8; margin-bottom: 12px; font-style: italic; }
+        .timeline-list li { margin-bottom: 8px; font-size: 0.95rem; color: var(--text-light); list-style-type: disc; margin-left: 20px; }
 
-        /* --- CONTACT --- */
-        footer { background: var(--secondary); color: var(--white); text-align: center; padding: 40px 20px; }
-        .contact-info { margin-top: 20px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-        .contact-item { font-size: 1.1rem; color: #cbd5e1; }
-        .contact-item span { color: var(--primary); font-weight: bold; }
+        /* --- CERTIFICATIONS (REVISI: Ada Button) --- */
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .cert-card { background: var(--white); padding: 25px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+        .cert-title { font-weight: 700; margin-bottom: 5px; color: var(--secondary); }
+        .cert-issuer { color: var(--primary); font-size: 0.9rem; margin-bottom: 15px; font-weight: 600; }
+        .cert-btn { display: inline-block; font-size: 0.85rem; color: var(--primary); font-weight: 600; text-decoration: underline; }
+        .cert-btn:hover { color: var(--secondary); }
+
+        /* --- FOOTER --- */
+        footer { background: var(--secondary); color: var(--white); padding: 60px 20px; text-align: center; }
+        .footer-links { display: flex; justify-content: center; gap: 30px; margin-top: 30px; margin-bottom: 30px; flex-wrap: wrap; }
+        .footer-btn { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.1); padding: 10px 25px; border-radius: 50px; color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+        .footer-btn:hover { background: var(--primary); border-color: var(--primary); }
+        .footer-copyright { color: #64748b; font-size: 0.85rem; }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* Simpel: hide nav links di mobile biar bersih */
-            .hero h1 { font-size: 2.2rem; }
-            .contact-info { flex-direction: column; gap: 10px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .footer-links { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
@@ -99,6 +122,7 @@
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#experience">Experience</a></li>
+                    <li><a href="#education">Education</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -107,10 +131,10 @@
 
     <section class="hero">
         <div class="container">
-            <p>Hi, I am</p>
+            <div class="hero-badge">👋 Hi, I am</div>
             <h1>Muhammad Rifki</h1>
             <p>Data & Business Analyst | System Improvement | Automation Enthusiast</p>
-            <div style="margin-top: 20px;">
+            <div>
                 <a href="#projects" class="btn">View My Work</a>
                 <a href="#contact" class="btn btn-outline">Contact Me</a>
             </div>
@@ -120,20 +144,12 @@
     <section id="about">
         <div class="container">
             <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <p>
-                    I am an Informatics student at Gunadarma University with a strong interest in data and technology. 
-                    I have hands-on experience in indirect procurement, data management, and digitalization systems, 
-                    as well as data analysis and visualization. Committed to continuous learning, I strive to leverage 
-                    my skills to support data-driven decision-making and deliver impactful, efficient solutions.
-                </p>
-                <p>
-                    <strong>Latest Positions:</strong><br>
-                    • Digital Lending Support Intern at Amartha Finance (Sep 2025 - Present)<br>
-                    • E-Commerce Blooming Intern at RedDoorz (Jan 2025 - Sep 2025)<br>
-                    • Indirect Procurement Admin Intern at PT Lion Super Indo (Jun 2024 - Jan 2025)
-                </p>
-            </div>
+            <p style="text-align: justify; color: var(--text-light); max-width: 800px; margin: 0 auto;">
+                I am an Informatics student at Gunadarma University with a strong interest in data and technology. 
+                I have hands-on experience in indirect procurement, data management, and digitalization systems. 
+                Committed to continuous learning, I strive to leverage my skills to support data-driven decision-making.
+                Currently working as a <strong>Digital Lending Support Intern at Amartha Finance</strong>.
+            </p>
         </div>
     </section>
 
@@ -143,12 +159,11 @@
             <div class="skills-grid">
                 <span class="skill-tag">Python (Data Science)</span>
                 <span class="skill-tag">SQL & PostgreSQL</span>
-                <span class="skill-tag">Google Looker Studio</span>
+                <span class="skill-tag">Looker Studio</span>
                 <span class="skill-tag">R & SPSS</span>
                 <span class="skill-tag">Google Apps Script</span>
                 <span class="skill-tag">Excel (VBA/Macros)</span>
                 <span class="skill-tag">SAP RMM</span>
-                <span class="skill-tag">Problem Solving</span>
             </div>
         </div>
     </section>
@@ -158,50 +173,52 @@
             <h2 class="section-title">Featured Projects</h2>
             <div class="project-grid">
                 
-                <div class="project-card">
-                    <img src="images/DS-Rifki.jpg" alt="Bansos Forecasting" class="project-img">
-                    <div class="project-body">
-                        <h3 class="project-title">Forecasting Social Assistance</h3>
-                        <p class="tech-stack">Python • Random Forest • Regression</p>
-                        <p class="project-desc">Predicted realization of social assistance recipients & budget. Achieved R²=0.84 for recipients accuracy.</p>
-                        <div class="project-links">
-                            <a href="https://bit.ly/ds-bnsp-rifki" class="link-btn" target="_blank">View Project</a>
-                            </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="images/NYC Visual.jpg" alt="NYC Dashboard" class="project-img">
-                    <div class="project-body">
-                        <h3 class="project-title">NYC Property Sales Dashboard</h3>
-                        <p class="tech-stack">BigQuery • Looker Studio • CRISP-DM</p>
-                        <p class="project-desc">Analyzed 204,000 rows of property sales data to identify trends and create interactive visualization.</p>
-                        <div class="project-links">
-                            <a href="https://bit.ly/DA-NYC-RIFKI" class="link-btn" target="_blank">View Dashboard</a>
+                <div class="card">
+                    <img src="images/DS-Rifki.jpg" alt="Bansos" class="card-img">
+                    <div class="card-body">
+                        <div class="card-subtitle">Data Science</div>
+                        <h3 class="card-title">Forecasting Social Assistance</h3>
+                        <p class="card-desc">Predicted realization of social assistance recipients & budget using Random Forest (R²=0.84).</p>
+                        <div class="btn-group">
+                            <a href="https://bit.ly/ds-bnsp-rifki" target="_blank" class="btn-sm btn-primary-sm">View Project</a>
+                            <a href="#" class="btn-sm"><i class="fab fa-github"></i> Code</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img src="images/T1.png" alt="Backend EWS" class="project-img">
-                    <div class="project-body">
-                        <h3 class="project-title">Backend EWS for MBG</h3>
-                        <p class="tech-stack">Flask • PostgreSQL • REST API</p>
-                        <p class="project-desc">Designed backend APIs for district prioritization and commodity price alerts with consistent JSON responses.</p>
-                        <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1qq6FYT7zRw6ZCyfxRBjlqVZALY2YfCFr/view?usp=sharing" class="link-btn" target="_blank">Read Thesis</a>
+                <div class="card">
+                    <img src="images/T1.png" alt="Thesis" class="card-img">
+                    <div class="card-body">
+                        <div class="card-subtitle">Thesis (Skripsi)</div>
+                        <h3 class="card-title">Backend EWS for MBG</h3>
+                        <p class="card-desc">Designed backend APIs for district prioritization and commodity price alerts (Flask/PostgreSQL).</p>
+                        <div class="btn-group">
+                            <a href="https://drive.google.com/file/d/1qq6FYT7zRw6ZCyfxRBjlqVZALY2YfCFr/view?usp=sharing" target="_blank" class="btn-sm btn-primary-sm">Read Thesis (PDF)</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img src="images/Kudata1.jpg" alt="Kudata Dashboard" class="project-img">
-                    <div class="project-body">
-                        <h3 class="project-title">Kudata Survey Dashboard</h3>
-                        <p class="tech-stack">Looker Studio • Data Vis</p>
-                        <p class="project-desc">Visualized demographics of 1,000+ users and prize distribution totaling Rp2.4 million.</p>
-                        <div class="project-links">
-                            <a href="https://bit.ly/da-survey-rifki" class="link-btn" target="_blank">View Dashboard</a>
+                <div class="card">
+                    <img src="images/PI.jpg" alt="PI" class="card-img">
+                    <div class="card-body">
+                        <div class="card-subtitle">Scientific Writing (PI)</div>
+                        <h3 class="card-title">Cheesecake Business Viz</h3>
+                        <p class="card-desc">Applied CRISP-DM to clean, explore, and model sales datasets with Looker Studio Dashboard.</p>
+                        <div class="btn-group">
+                            <a href="https://lookerstudio.google.com/reporting/c9090929-ea8f-4de6-839d-94ad0128f563" target="_blank" class="btn-sm btn-primary-sm">Dashboard</a>
+                            <a href="https://drive.google.com/file/d/1m9vOUinttUIye93fLzSt250-per44bxY/view?usp=sharing" target="_blank" class="btn-sm">Read PDF</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="images/NYC Visual.jpg" alt="NYC" class="card-img">
+                    <div class="card-body">
+                        <div class="card-subtitle">Data Analysis</div>
+                        <h3 class="card-title">NYC Property Dashboard</h3>
+                        <p class="card-desc">Analyzed 204,000 rows of NYC property sales data to identify trends.</p>
+                        <div class="btn-group">
+                            <a href="https://bit.ly/DA-NYC-RIFKI" target="_blank" class="btn-sm btn-primary-sm">View Dashboard</a>
                         </div>
                     </div>
                 </div>
@@ -212,48 +229,36 @@
 
     <section id="experience" style="background-color: var(--white);">
         <div class="container">
-            <h2 class="section-title">Experience</h2>
+            <h2 class="section-title">Work Experience</h2>
             <div class="timeline">
                 
                 <div class="timeline-item">
-                    <div class="role">Digital Lending Support Intern</div>
-                    <div class="company">Amartha Finance</div>
-                    <div class="date">Sep 2025 - Present</div>
-                    <ul class="timeline-desc">
-                        <li>• Support digital lending operations, ensuring smooth loan processing.</li>
-                        <li>• Assist in data analysis and reporting to optimize lending strategies.</li>
-                        <li>• Collaborate with cross-functional teams to enhance digital platforms.</li>
+                    <div class="timeline-role">Digital Lending Support Intern</div>
+                    <div class="timeline-place">Amartha Finance</div>
+                    <div class="timeline-date">Sep 2025 - Present</div>
+                    <ul class="timeline-list">
+                        <li>Support digital lending operations, ensuring smooth loan processing.</li>
+                        <li>Assist in data analysis and reporting to optimize lending strategies.</li>
                     </ul>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="role">E-Commerce Blooming Intern</div>
-                    <div class="company">RedDoorz Indonesia</div>
-                    <div class="date">Jan 2025 - Sep 2025</div>
-                    <ul class="timeline-desc">
-                        <li>• Deploy "Bloom Tools v3", boosting team productivity by 40%.</li>
-                        <li>• Automated KPI tracking with Google Apps Script.</li>
-                        <li>• Investigate 3 major cross-source data inconsistencies.</li>
+                    <div class="timeline-role">E-Commerce Blooming Intern</div>
+                    <div class="timeline-place">RedDoorz Indonesia</div>
+                    <div class="timeline-date">Jan 2025 - Sep 2025</div>
+                    <ul class="timeline-list">
+                        <li>Developed 5 custom dashboards and automated KPI tracking.</li>
+                        <li>Deployed "Bloom Tools v3", boosting team productivity by 40%.</li>
                     </ul>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="role">Indirect Procurement Admin Intern</div>
-                    <div class="company">PT. Lion Super Indo</div>
-                    <div class="date">Jun 2024 - Jan 2025</div>
-                    <ul class="timeline-desc">
-                        <li>• Automated daily reporting using macros, reducing report time by 70%.</li>
-                        <li>• Maintained SAP Master Data (100+ records) ensuring accuracy.</li>
-                    </ul>
-                </div>
-
-                 <div class="timeline-item">
-                    <div class="role">Data Entry Intern</div>
-                    <div class="company">SIRCLO</div>
-                    <div class="date">Mar 2024 - Jun 2024</div>
-                    <ul class="timeline-desc">
-                        <li>• Entered 70+ products daily into Magento with 100% accuracy.</li>
-                        <li>• Improved data management efficiency by 25%.</li>
+                    <div class="timeline-role">Indirect Procurement Admin Intern</div>
+                    <div class="timeline-place">PT. Lion Super Indo</div>
+                    <div class="timeline-date">Jun 2024 - Jan 2025</div>
+                    <ul class="timeline-list">
+                        <li>Automated daily reporting using macros, reducing report time by 70%.</li>
+                        <li>Maintained SAP Master Data (100+ records) ensuring accuracy.</li>
                     </ul>
                 </div>
 
@@ -261,15 +266,93 @@
         </div>
     </section>
 
+    <section id="organization">
+        <div class="container">
+            <h2 class="section-title">Organization</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-role">Kepala Bidang Kemahasiswaan</div>
+                    <div class="timeline-place">BEM FTI UG</div>
+                    <div class="timeline-date">Agt 2024 - Jul 2025</div>
+                    <ul class="timeline-list">
+                        <li>Led student welfare initiatives and advocacy programs.</li>
+                        <li>Previously served as Deputy Head of Advocacy (2023-2024).</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-role">Bendahara / Treasurer</div>
+                    <div class="timeline-place">SNAP Photography Gunadarma</div>
+                    <div class="timeline-date">Sep 2023 - Sep 2024</div>
+                    <ul class="timeline-list">
+                        <li>Managed financial records and budgeting for the organization.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="education" style="background-color: var(--white);">
+        <div class="container">
+            <h2 class="section-title">Education & Certifications</h2>
+            
+            <div style="margin-bottom: 50px;">
+                <h3 style="margin-bottom: 20px; color: var(--secondary);">🎓 Education</h3>
+                <div class="card" style="padding: 20px; border-left: 5px solid var(--primary);">
+                    <h3 style="font-size: 1.3rem;">Universitas Gunadarma</h3>
+                    <p style="color: var(--primary); font-weight: 600;">Informatika (S1)</p>
+                    <p style="color: #64748b;">Sep 2021 - Sep 2025 | <strong>GPA: 3.65/4.00</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.9rem;">Relevant Coursework: Data Structures, Database Systems, Intermediate SQL.</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom: 20px; color: var(--secondary);">📜 Certifications</h3>
+                <div class="cert-grid">
+                    
+                    <div class="cert-card">
+                        <div class="cert-title">Data Analytics & Software Dev</div>
+                        <div class="cert-issuer">RevoU Kampus Merdeka</div>
+                        <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 10px;">Feb 2024 - Jun 2024</p>
+                        <a href="#" class="cert-btn" target="_blank">View Certificate <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-title">Basic Python & SQL</div>
+                        <div class="cert-issuer">G2Academy</div>
+                        <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 10px;">Sep 2023</p>
+                        <a href="#" class="cert-btn" target="_blank">View Certificate <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer id="contact">
         <div class="container">
-            <h2>Ready to Contribute</h2>
-            <p>Feel free to reach out for collaboration or inquiries.</p>
-            <div class="contact-info">
-                <div class="contact-item">Email: <span>rifki.muhmd102@gmail.com</span></div>
-                <div class="contact-item">Phone: <span>(+62) 851-5533-8010</span></div>
+            <h2>Ready to Collaborate?</h2>
+            <p>Feel free to reach out for opportunities or inquiries.</p>
+            
+            <div class="footer-links">
+                <a href="mailto:rifki.muhmd102@gmail.com" class="footer-btn">
+                    <i class="fas fa-envelope"></i> Email Me
+                </a>
+                
+                <a href="https://wa.me/6285155338010" target="_blank" class="footer-btn" style="background-color: #25D366; border-color: #25D366;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+
+                <a href="https://linkedin.com/in/username-lu" target="_blank" class="footer-btn" style="background-color: #0077b5; border-color: #0077b5;">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
             </div>
-            <p style="margin-top: 30px; font-size: 0.8rem; color: #64748b;">© 2025 Muhammad Rifki. Built with Code.</p>
+
+            <div class="footer-copyright">
+                © 2025 Muhammad Rifki. Built with Code.
+            </div>
         </div>
     </footer>
 
