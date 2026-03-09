@@ -613,16 +613,33 @@
             margin-bottom: 32px;
         }
 
+        /* ── CONTACT ITEMS ── */
         .contact-item {
             display: flex;
             align-items: center;
             gap: 14px;
-            padding: 14px 0;
-            border-bottom: 1px solid var(--border);
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: border-color .2s, transform .2s, box-shadow .2s;
+            position: relative;
+            text-decoration: none;
+            color: inherit;
         }
+        .contact-item:hover {
+            border-color: rgba(0,174,239,.3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,.3);
+        }
+        .contact-item.ci--email:hover  { border-color: rgba(0,174,239,.4); }
+        .contact-item.ci--wa:hover     { border-color: rgba(37,211,102,.4); box-shadow: 0 6px 20px rgba(37,211,102,.08); }
+        .contact-item.ci--linkedin:hover { border-color: rgba(0,119,181,.5); box-shadow: 0 6px 20px rgba(0,119,181,.1); }
 
         .ci-icon {
-            width: 40px; height: 40px;
+            width: 42px; height: 42px;
             border-radius: 10px;
             background: var(--blue-dim);
             display: flex;
@@ -631,15 +648,28 @@
             color: var(--blue);
             flex-shrink: 0;
         }
-
-        .ci-label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+        .ci-label { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 2px; }
         .ci-value { font-size: .92rem; color: var(--text); font-weight: 500; }
+        .ci-hint  { font-size: .75rem; color: var(--muted); font-weight: 400; margin-left: 6px; }
+        .ci-arrow { margin-left: auto; color: var(--muted); font-size: .8rem; flex-shrink: 0; }
 
-        .ci-link { color: var(--blue); text-decoration: none; transition: opacity .2s; }
-        .ci-link:hover { opacity: .75; text-decoration: underline; }
-
-        .contact-item--clickable { cursor: pointer; transition: background .2s; border-radius: 8px; padding-left: 8px; margin-left: -8px; }
-        .contact-item--clickable:hover { background: rgba(37,211,102,.05); }
+        /* Copy toast */
+        .copy-toast {
+            position: fixed;
+            bottom: 32px; left: 50%; transform: translateX(-50%) translateY(10px);
+            background: var(--card);
+            border: 1px solid rgba(0,174,239,.3);
+            color: var(--blue);
+            padding: 10px 20px;
+            border-radius: 99px;
+            font-size: .85rem;
+            font-weight: 500;
+            z-index: 9000;
+            opacity: 0;
+            transition: opacity .25s, transform .25s;
+            pointer-events: none;
+        }
+        .copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         .social-row {
             display: flex;
@@ -1334,35 +1364,40 @@
             <div class="reveal" style="transition-delay:.1s">
                 <p class="contact-cta">I'm open to new opportunities, collaborations, and interesting data challenges. Feel free to reach out!</p>
 
-                <div class="contact-item">
+                <!-- Email: click to copy -->
+                <div class="contact-item ci--email" id="email-item" title="Click to copy email">
                     <div class="ci-icon"><i class="fas fa-envelope"></i></div>
-                    <div>
-                        <div class="ci-label">Email</div>
-                        <div class="ci-value"><a href="mailto:rifki.muhmd102@gmail.com" class="ci-link">rifki.muhmd102@gmail.com</a></div>
+                    <div style="flex:1;min-width:0;">
+                        <div class="ci-label">Email <span class="ci-hint">· click to copy</span></div>
+                        <div class="ci-value">rifki.muhmd102@gmail.com</div>
                     </div>
+                    <div class="ci-arrow"><i class="fas fa-copy"></i></div>
                 </div>
 
-                <div class="contact-item contact-item--clickable" data-wa-open="true" title="Click to send WhatsApp message">
+                <!-- WhatsApp: click to open modal -->
+                <div class="contact-item ci--wa" data-wa-open="true" title="Click to send WhatsApp message">
                     <div class="ci-icon" style="background:rgba(37,211,102,.12);color:#25D366;"><i class="fab fa-whatsapp"></i></div>
-                    <div>
-                        <div class="ci-label">WhatsApp</div>
-                        <div class="ci-value" style="color:#25D366;">(+62) 851-5533-8010 <span style="font-size:.75rem;color:var(--muted);font-weight:400;">· click to message</span></div>
+                    <div style="flex:1;min-width:0;">
+                        <div class="ci-label">WhatsApp <span class="ci-hint">· click to message</span></div>
+                        <div class="ci-value" style="color:#25D366;">(+62) 851-5533-8010</div>
                     </div>
-                    <div style="margin-left:auto;color:var(--muted);font-size:.8rem;"><i class="fas fa-chevron-right"></i></div>
+                    <div class="ci-arrow"><i class="fas fa-chevron-right"></i></div>
                 </div>
 
-                <div class="contact-item">
-                    <div class="ci-icon"><i class="fab fa-linkedin-in"></i></div>
-                    <div>
-                        <div class="ci-label">LinkedIn</div>
-                        <div class="ci-value"><a href="https://www.linkedin.com/in/muhrifki/" target="_blank" class="ci-link">linkedin.com/in/muhrifki</a></div>
+                <!-- LinkedIn: click to open profile -->
+                <a class="contact-item ci--linkedin" href="https://www.linkedin.com/in/muhrifki/" target="_blank" title="Open LinkedIn profile">
+                    <div class="ci-icon" style="background:rgba(0,119,181,.12);color:#0077B5;"><i class="fab fa-linkedin-in"></i></div>
+                    <div style="flex:1;min-width:0;">
+                        <div class="ci-label">LinkedIn <span class="ci-hint">· click to open</span></div>
+                        <div class="ci-value">linkedin.com/in/muhrifki</div>
                     </div>
-                </div>
+                    <div class="ci-arrow"><i class="fas fa-external-link-alt"></i></div>
+                </a>
 
                 <div class="social-row">
                     <a href="https://www.linkedin.com/in/muhrifki/" target="_blank" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     <span class="social-btn" style="cursor:pointer;" data-wa-open="true" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25D366;"></i></span>
-                    <a href="/cdn-cgi/l/email-protection#80f2e9e6ebe9aeedf5e8ede4b1b0b2c0e7ede1e9ecaee3efed" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="mailto:rifki.muhmd102@gmail.com" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -1596,7 +1631,35 @@ if ('IntersectionObserver' in window) {
     reveals.forEach(function(el){ if (!el.classList.contains('visible')) io.observe(el); });
 }
 
+/* ── Copy email to clipboard ─────────────────── */
+var emailItem = document.getElementById('email-item');
+if (emailItem) {
+    emailItem.addEventListener('click', function() {
+        var email = 'rifki.muhmd102@gmail.com';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(showCopyToast);
+        } else {
+            var ta = document.createElement('textarea');
+            ta.value = email;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showCopyToast();
+        }
+    });
+}
+
+function showCopyToast() {
+    var toast = document.getElementById('copy-toast');
+    toast.classList.add('show');
+    setTimeout(function(){ toast.classList.remove('show'); }, 2200);
+}
+
 })();
 </script>
+<div id="copy-toast" class="copy-toast"><i class="fas fa-check"></i> Email copied!</div>
 </body>
 </html>
