@@ -237,7 +237,7 @@
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 14px;
-            letter-spacing: -.03em;
+            letter-spacing: .08em;
         }
 
         .hero-role {
@@ -889,6 +889,28 @@
         }
         .btn--wa:hover { background: #20bf5c; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,211,102,.3); }
 
+
+        /* ── CERT BUTTON ─────────────────────────────────────────── */
+        .cert-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 14px;
+            padding: 7px 14px;
+            border-radius: 6px;
+            background: var(--blue-dim);
+            border: 1px solid rgba(0,174,239,.25);
+            color: var(--blue);
+            font-size: .8rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all .2s;
+        }
+        .cert-btn:hover {
+            background: rgba(0,174,239,.22);
+            transform: translateY(-1px);
+        }
+
         /* ── CV DOWNLOAD HERO BADGE ──────────────────────────────── */
         .cv-badge {
             display: inline-flex;
@@ -1037,6 +1059,8 @@
             <div class="skill-card reveal" style="transition-delay:.30s"><i class="fas fa-search-dollar"></i><p>SAP RMM</p></div>
             <div class="skill-card reveal" style="transition-delay:.35s"><i class="fas fa-calculator"></i><p>R & SPSS</p></div>
             <div class="skill-card reveal" style="transition-delay:.40s"><i class="fas fa-brain"></i><p>Problem Solving</p></div>
+            <div class="skill-card reveal" style="transition-delay:.45s"><i class="fas fa-chart-pie"></i><p>Power BI</p></div>
+            <div class="skill-card reveal" style="transition-delay:.50s"><i class="fas fa-tachometer-alt"></i><p>Metabase</p></div>
         </div>
     </div>
 </section>
@@ -1175,6 +1199,11 @@
                     <div class="tl-company">Al-Izhar Pondok Labu</div>
                     <div class="tl-role">Data Analyst — Staff Monitoring & Evaluasi</div>
                     <div class="tl-date">Nov 2025 – Present</div>
+                    <ul class="tl-list">
+                        <li>Performed end-to-end data preparation including collection, cleansing, and normalization to ensure accuracy and consistency across datasets.</li>
+                        <li>Developed interactive dashboards using <strong>Google Looker Studio, Power BI, and Metabase</strong> to help stakeholders monitor KPIs and support strategic planning.</li>
+                        <li>Automated report generation from observation forms, significantly reducing manual data entry and ensuring consistent performance tracking across all school units.</li>
+                    </ul>
                 </div>
 
                 <div class="tl-item reveal" style="transition-delay:.05s">
@@ -1183,9 +1212,9 @@
                     <div class="tl-role">Digital Lending Support Intern</div>
                     <div class="tl-date">Sep 2025 – Nov 2025 · 2 months</div>
                     <ul class="tl-list">
-                        <li>Supported digital lending operations and loan processing.</li>
-                        <li>Assisted in data analysis and reporting to optimize lending strategies.</li>
-                        <li>Collaborated with cross-functional teams to enhance digital platforms.</li>
+                        <li>Handled limit refund processes for failed transactions by validating and reconciling credit data across internal databases.</li>
+                        <li>Conducted weekly data reconciliation between payment gateway and Amartha's internal systems to ensure data accuracy and integrity.</li>
+                        <li>Ran SQL queries to extract and validate datasets for lending strategy optimization and competitor benchmarking.</li>
                     </ul>
                 </div>
 
@@ -1195,10 +1224,11 @@
                     <div class="tl-role">E-Commerce Blooming Intern (Data & Business Analyst)</div>
                     <div class="tl-date">Jan 2025 – Sep 2025 · 9 months</div>
                     <ul class="tl-list">
-                        <li>Evaluated 50+ newly onboarded properties/month for GMB readiness and pricing competitiveness.</li>
-                        <li>Investigated 3 major cross-source data inconsistencies, improving reporting accuracy.</li>
-                        <li>Developed 5 custom dashboards and automated KPI tracking with Google Apps Script.</li>
-                        <li>Deployed "Bloom Tools v3", boosting team productivity by 40%.</li>
+                        <li>Evaluated <strong>50+ newly onboarded properties/month</strong> for GMB readiness, OTA coverage, and pricing competitiveness via district/city-level market analysis.</li>
+                        <li>Investigated 3 major cross-source data inconsistencies, tracing anomalies across multiple systems to improve data integrity and business-critical reporting.</li>
+                        <li>Developed <strong>5 custom dashboards</strong> with Google Apps Script-based monitoring and alerting to proactively flag performance drops and closure risks.</li>
+                        <li>Designed & deployed <strong>"Bloom Tools v3"</strong> — a centralized analytics toolkit that automated KPI tracking and boosted team productivity by <strong>40%</strong>.</li>
+                        <li>Acted as go-to data provider for the Blooming team; delivered insights for pricing strategy, property prioritization, and campaign targeting.</li>
                     </ul>
                 </div>
 
@@ -1208,21 +1238,21 @@
                     <div class="tl-role">Indirect Procurement Admin Intern (Data Management)</div>
                     <div class="tl-date">Jun 2024 – Jan 2025 · 8 months</div>
                     <ul class="tl-list">
-                        <li>Improved digital document system; scanned 1,000+ procurement files.</li>
-                        <li>Built Excel databases and dashboards for contract & tender data.</li>
-                        <li>Automated daily procurement reporting with macros & Outlook integration — reduced report time by 70%.</li>
-                        <li>Maintained SAP Master Data (100+ records).</li>
+                        <li>Enhanced document digitization system by adding linking points, scanning <strong>1,000+ procurement files</strong>, and centralizing hard-copy documents.</li>
+                        <li>Built 2 Excel-based databases and dashboards, improving document accessibility and interlinking across procurement processes.</li>
+                        <li>Automated daily and weekly reporting with Excel macros + Outlook integration — reduced report generation time by <strong>70%</strong>.</li>
+                        <li>Managed SAP Master Data cleansing for <strong>100+ records</strong>, ensuring accuracy, consistency, and compliance across vendor and material databases.</li>
                     </ul>
                 </div>
 
                 <div class="tl-item reveal" style="transition-delay:.20s">
                     <div class="tl-dot"></div>
-                    <div class="tl-company">SIRCLO</div>
+                    <div class="tl-company">PT Lingkar Niaga Solusindo (SIRCLO)</div>
                     <div class="tl-role">Data Entry Intern</div>
                     <div class="tl-date">Mar 2024 – Jun 2024 · 4 months</div>
                     <ul class="tl-list">
-                        <li>Entered 70+ products daily into Magento with 100% accuracy.</li>
-                        <li>Improved data management efficiency by 25%.</li>
+                        <li>Entered <strong>70+ products daily</strong> into Magento with 100% accuracy, ensuring complete and consistent product data.</li>
+                        <li>Improved e-commerce data management processes, increasing entry efficiency by <strong>25%</strong>.</li>
                     </ul>
                 </div>
             </div>
@@ -1268,18 +1298,28 @@
                 <div class="edu-detail">Sep 2021 – Sep 2025 &nbsp;·&nbsp; GPA 3.65/4.00<br>Relevant: Data Structures, Database Systems, Intermediate SQL</div>
             </div>
 
-            <div class="edu-card reveal" style="transition-delay:.10s">
+            <div class="edu-card reveal" style="transition-delay:.08s">
+                <div class="edu-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="edu-school">BNSP</div>
+                <div class="edu-degree">Data Science Certification</div>
+                <div class="edu-detail">Jul 2025 &nbsp;·&nbsp; National Professional Certification Body</div>
+                <a href="https://drive.google.com/file/d/18AXBFgXV-k91VakmsSx-xEXmr64clLDL/view" target="_blank" class="cert-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+
+            <div class="edu-card reveal" style="transition-delay:.12s">
                 <div class="edu-icon"><i class="fas fa-laptop-code"></i></div>
                 <div class="edu-school">RevoU Kampus Merdeka</div>
                 <div class="edu-degree">Data Analytics & Software Development with AI</div>
                 <div class="edu-detail">Feb 2024 – Jun 2024</div>
+                <a href="https://drive.google.com/file/d/1pgmjaaeDteSvfYrKcF4m_bjFJwXdLFiC/view?usp=sharing" target="_blank" class="cert-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
             </div>
 
-            <div class="edu-card reveal" style="transition-delay:.15s">
+            <div class="edu-card reveal" style="transition-delay:.16s">
                 <div class="edu-icon"><i class="fas fa-certificate"></i></div>
                 <div class="edu-school">G2Academy</div>
                 <div class="edu-degree">Basic Python, SQL & Data Visualization</div>
                 <div class="edu-detail">September 2023 &nbsp;·&nbsp; Tableau</div>
+                <a href="https://g2labcms.s3-ap-southeast-1.amazonaws.com/certificates/1694481382387-certificate16928391602562189871.png" target="_blank" class="cert-btn"><i class="fas fa-external-link-alt"></i> View Certificate</a>
             </div>
         </div>
     </div>
@@ -1298,7 +1338,7 @@
                     <div class="ci-icon"><i class="fas fa-envelope"></i></div>
                     <div>
                         <div class="ci-label">Email</div>
-                        <div class="ci-value"><a href="/cdn-cgi/l/email-protection#1b69727d707235766e73767f2a2b295b7c767a727735787476" class="ci-link"><span class="__cf_email__" data-cfemail="314358575a581f5c44595c5500010371565c50585d1f525e5c">[email&#160;protected]</span></a></div>
+                        <div class="ci-value"><a href="mailto:rifki.muhmd102@gmail.com" class="ci-link">rifki.muhmd102@gmail.com</a></div>
                     </div>
                 </div>
 
@@ -1322,7 +1362,7 @@
                 <div class="social-row">
                     <a href="https://www.linkedin.com/in/muhrifki/" target="_blank" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     <span class="social-btn" style="cursor:pointer;" onclick="document.getElementById('wa-modal').style.display='flex'" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25D366;"></i></span>
-                    <a href="/cdn-cgi/l/email-protection#106279767b793e7d65787d7421202250777d71797c3e737f7d" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="mailto:rifki.muhmd102@gmail.com" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -1464,7 +1504,10 @@ document.querySelectorAll('.exp-tab').forEach(btn => {
         document.querySelectorAll('.exp-tab').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
-        document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+        var panel = document.getElementById('panel-' + btn.dataset.tab);
+        panel.classList.add('active');
+        // Make sure all reveal items inside are visible
+        panel.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
     });
 });
 
@@ -1490,10 +1533,11 @@ function updateWAPreview() {
 }
 
 function sendWAMessage() {
-    const name    = document.getElementById('wa-name').value.trim() || 'Someone';
-    const company = document.getElementById('wa-company').value.trim() || 'an organization';
-    const msg = `Hello Rifki, I'm ${name} from ${company}. I came across your portfolio and I'm interested in your profile and CV. Would you be open to having a discussion?`;
-    const url = `https://wa.me/6285155338010?text=${encodeURIComponent(msg)}`;
+    var name    = document.getElementById('wa-name').value.trim() || 'Someone';
+    var company = document.getElementById('wa-company').value.trim() || 'an organization';
+    var msg = "Hello Rifki, I'm " + name + " from " + company + ". I came across your portfolio and I'm interested in your profile and CV. Would you be open to having a discussion?";
+    var url = "https://wa.me/6285155338010?text=" + encodeURIComponent(msg);
+    document.getElementById('wa-modal').style.display = 'none';
     window.open(url, '_blank');
 }
 
