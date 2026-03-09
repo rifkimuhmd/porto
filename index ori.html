@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muhammad Rifki — Data & Business Analyst</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* ── RESET & TOKENS ─────────────────────────────────────── */
@@ -72,20 +72,22 @@
         /* ── SECTION HEADING ────────────────────────────────────── */
         .section-label {
             font-family: var(--font-head);
-            font-size: .75rem;
-            letter-spacing: .2em;
+            font-size: .72rem;
+            letter-spacing: .18em;
             text-transform: uppercase;
             color: var(--blue);
             margin-bottom: 12px;
         }
+        .section-label::before { content: '// '; opacity: .5; }
 
         .section-title {
             font-family: var(--font-head);
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: 800;
-            line-height: 1.15;
+            font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.2;
             margin-bottom: 60px;
             color: var(--text);
+            letter-spacing: -.02em;
         }
 
         .section-title span { color: var(--blue); }
@@ -139,11 +141,11 @@
 
         .logo {
             font-family: var(--font-head);
-            font-size: 1.25rem;
-            font-weight: 800;
+            font-size: 1.1rem;
+            font-weight: 700;
             color: var(--blue);
             text-decoration: none;
-            letter-spacing: -.01em;
+            letter-spacing: -.02em;
         }
 
         .nav-links { display: flex; gap: 4px; }
@@ -229,22 +231,22 @@
 
         .hero-text { flex: 1; }
         .hero-greeting {
-            font-size: .9rem;
+            font-size: .82rem;
             color: var(--blue);
-            letter-spacing: .15em;
-            text-transform: uppercase;
-            font-weight: 500;
+            letter-spacing: .05em;
+            font-weight: 400;
             margin-bottom: 14px;
             font-family: var(--font-head);
+            opacity: .8;
         }
 
         .hero-name {
             font-family: var(--font-head);
-            font-size: clamp(2.4rem, 5vw, 4rem);
-            font-weight: 800;
-            line-height: 1.05;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.1;
             margin-bottom: 14px;
-            letter-spacing: -.02em;
+            letter-spacing: -.03em;
         }
 
         .hero-role {
@@ -420,12 +422,12 @@
         .project-meta { margin-bottom: 10px; }
 
         .project-title {
-            font-family: var(--font-head);
-            font-size: 1.05rem;
-            font-weight: 700;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
             color: var(--text);
             margin-bottom: 8px;
-            line-height: 1.35;
+            line-height: 1.4;
         }
 
         .project-tools { font-size: .8rem; color: var(--blue); margin-bottom: 10px; font-weight: 500; }
@@ -540,7 +542,7 @@
         }
 
         .tl-company {
-            font-family: var(--font-head);
+            font-family: var(--font-body);
             font-size: 1.05rem;
             font-weight: 700;
             color: var(--text);
@@ -641,6 +643,12 @@
 
         .ci-label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
         .ci-value { font-size: .92rem; color: var(--text); font-weight: 500; }
+
+        .ci-link { color: var(--blue); text-decoration: none; transition: opacity .2s; }
+        .ci-link:hover { opacity: .75; text-decoration: underline; }
+
+        .contact-item--clickable { cursor: pointer; transition: background .2s; border-radius: 8px; padding-left: 8px; margin-left: -8px; }
+        .contact-item--clickable:hover { background: rgba(37,211,102,.05); }
 
         .social-row {
             display: flex;
@@ -797,7 +805,118 @@
             .hero-stats { flex-wrap: wrap; gap: 20px; }
         }
 
-        /* ── FOCUS / A11Y ───────────────────────────────────────── */
+        /* ── WHATSAPP MODAL ─────────────────────────────────────── */
+        .wa-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            background: rgba(0,0,0,.7);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wa-modal-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px;
+            width: min(90vw, 480px);
+            position: relative;
+        }
+
+        .wa-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .wa-modal-icon {
+            width: 48px; height: 48px;
+            background: rgba(37,211,102,.12);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #25D366;
+        }
+
+        .wa-modal-title { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; }
+        .wa-modal-sub { font-size: .82rem; color: var(--muted); margin-top: 2px; }
+
+        .wa-modal-close {
+            position: absolute;
+            top: 16px; right: 16px;
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+            transition: all .2s;
+        }
+        .wa-modal-close:hover { color: var(--text); border-color: var(--text); }
+
+        .wa-field { margin-bottom: 16px; }
+        .wa-label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; display: block; }
+        .wa-input {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: .9rem;
+            transition: border-color .2s;
+            outline: none;
+        }
+        .wa-input:focus { border-color: #25D366; }
+        .wa-preview {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px;
+            font-size: .85rem;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            min-height: 80px;
+            font-style: italic;
+        }
+        .wa-preview strong { color: var(--text); font-style: normal; }
+        .btn--wa {
+            background: #25D366;
+            color: #fff;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn--wa:hover { background: #20bf5c; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,211,102,.3); }
+
+        /* ── CV DOWNLOAD HERO BADGE ──────────────────────────────── */
+        .cv-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 99px;
+            background: var(--blue-dim);
+            border: 1px solid rgba(0,174,239,.25);
+            color: var(--blue);
+            font-size: .82rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all .25s;
+            margin-top: 12px;
+        }
+        .cv-badge:hover { background: rgba(0,174,239,.2); transform: translateY(-1px); }
+
+    
         a:focus-visible, button:focus-visible {
             outline: 2px solid var(--blue);
             outline-offset: 3px;
@@ -817,7 +936,7 @@
 <!-- ══════════════════════ HEADER ══════════════════════ -->
 <header>
     <div class="container navbar">
-        <a href="#hero" class="logo">Rifki<span style="color:var(--blue);">.</span></a>
+        <a href="#hero" class="logo">&lt;Rifki /&gt;</a>
         <nav class="nav-links">
             <a href="#about">About</a>
             <a href="#skills">Skills</a>
@@ -839,13 +958,14 @@
             </div>
 
             <div class="hero-text reveal" style="transition-delay:.15s">
-                <p class="hero-greeting">👋 Hello, I'm</p>
+                <p class="hero-greeting">/** Hello, I'm */</p>
                 <h1 class="hero-name">Muhammad<br>Rifki</h1>
                 <p class="hero-role"><strong>Data & Business Analyst</strong> &nbsp;·&nbsp; System Improvement & Automation</p>
                 <p class="hero-desc">Fresh graduate turning raw data into actionable decisions. Passionate about building dashboards, pipelines, and tools that make teams move faster.</p>
                 <div class="hero-actions">
                     <a href="#projects" class="btn btn--primary"><i class="fas fa-chart-line"></i> View Projects</a>
                     <a href="#contact" class="btn btn--ghost"><i class="fas fa-paper-plane"></i> Contact Me</a>
+                    <a href="https://drive.google.com/drive/folders/1xYEtS3Pr2Ip64-Y04A60gVCOcd4Tp54S?usp=sharing" target="_blank" class="cv-badge"><i class="fas fa-file-download"></i> Download CV</a>
                 </div>
                 <div class="hero-stats">
                     <div>
@@ -1189,38 +1309,83 @@
                     <div class="ci-icon"><i class="fas fa-envelope"></i></div>
                     <div>
                         <div class="ci-label">Email</div>
-                        <div class="ci-value">m.rifki.mail@gmail.com</div>
+                        <div class="ci-value"><a href="mailto:rifki.muhmd102@gmail.com" class="ci-link">rifki.muhmd102@gmail.com</a></div>
                     </div>
                 </div>
 
-                <div class="contact-item">
-                    <div class="ci-icon"><i class="fas fa-phone"></i></div>
+                <div class="contact-item contact-item--clickable" onclick="document.getElementById('wa-modal').style.display='flex'" title="Click to send WhatsApp message">
+                    <div class="ci-icon" style="background:rgba(37,211,102,.12);color:#25D366;"><i class="fab fa-whatsapp"></i></div>
                     <div>
-                        <div class="ci-label">Phone / WhatsApp</div>
-                        <div class="ci-value">(+62) 851-5533-8010</div>
+                        <div class="ci-label">WhatsApp</div>
+                        <div class="ci-value" style="color:#25D366;">(+62) 851-5533-8010 <span style="font-size:.75rem;color:var(--muted);font-weight:400;">· click to message</span></div>
+                    </div>
+                    <div style="margin-left:auto;color:var(--muted);font-size:.8rem;"><i class="fas fa-chevron-right"></i></div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="ci-icon"><i class="fab fa-linkedin-in"></i></div>
+                    <div>
+                        <div class="ci-label">LinkedIn</div>
+                        <div class="ci-value"><a href="https://www.linkedin.com/in/muhrifki/" target="_blank" class="ci-link">linkedin.com/in/muhrifki</a></div>
                     </div>
                 </div>
 
                 <div class="social-row">
-                    <a href="http://www.linkedin.com/in/muhrifki" target="_blank" class="social-btn" title="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <!-- Add more social links here -->
+                    <a href="https://www.linkedin.com/in/muhrifki/" target="_blank" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <span class="social-btn" style="cursor:pointer;" onclick="document.getElementById('wa-modal').style.display='flex'" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25D366;"></i></span>
+                    <a href="mailto:rifki.muhmd102@gmail.com" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
 
             <div class="contact-deco reveal" style="transition-delay:.2s">
-                <div class="contact-deco-icon"><i class="fas fa-chart-network"></i></div>
+                <div class="contact-deco-icon"><i class="fas fa-user-tie"></i></div>
                 <h3>Open to Opportunities</h3>
-                <p>Data Analyst · Business Intelligence · Data Engineer · Analytics Engineer</p>
-                <br>
-                <a href="http://www.linkedin.com/in/muhrifki" target="_blank" class="btn btn--primary" style="margin-top:8px">
-                    <i class="fab fa-linkedin-in"></i> Connect on LinkedIn
-                </a>
+                <p>Data Analyst · Business Intelligence<br>Data Engineer · Analytics Engineer</p>
+                <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px;">
+                    <a href="https://www.linkedin.com/in/muhrifki/" target="_blank" class="btn btn--primary" style="justify-content:center;">
+                        <i class="fab fa-linkedin-in"></i> Connect on LinkedIn
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1xYEtS3Pr2Ip64-Y04A60gVCOcd4Tp54S?usp=sharing" target="_blank" class="btn btn--ghost" style="justify-content:center;">
+                        <i class="fas fa-file-download"></i> Download CV
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- ══════════════════════ WHATSAPP MODAL ══════════════ -->
+<div id="wa-modal" class="wa-modal-overlay" onclick="if(event.target===this)this.style.display='none'">
+    <div class="wa-modal-box">
+        <button class="wa-modal-close" onclick="document.getElementById('wa-modal').style.display='none'">&times;</button>
+        <div class="wa-modal-header">
+            <div class="wa-modal-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+                <div class="wa-modal-title">Send a WhatsApp Message</div>
+                <div class="wa-modal-sub">to Muhammad Rifki · (+62) 851-5533-8010</div>
+            </div>
+        </div>
+
+        <div class="wa-field">
+            <label class="wa-label" for="wa-name">Your Name</label>
+            <input class="wa-input" id="wa-name" type="text" placeholder="e.g. Sarah" oninput="updateWAPreview()">
+        </div>
+        <div class="wa-field">
+            <label class="wa-label" for="wa-company">Company / Institution</label>
+            <input class="wa-input" id="wa-company" type="text" placeholder="e.g. PT Tokopedia" oninput="updateWAPreview()">
+        </div>
+        <div class="wa-field">
+            <label class="wa-label">Message Preview</label>
+            <div class="wa-preview" id="wa-preview">
+                Hello Rifki, I'm <strong>[Your Name]</strong> from <strong>[Company]</strong>. I came across your portfolio and I'm interested in your profile and CV. Would you be open to having a discussion?
+            </div>
+        </div>
+
+        <button class="btn btn--wa" onclick="sendWAMessage()">
+            <i class="fab fa-whatsapp"></i> Open in WhatsApp
+        </button>
+    </div>
+</div>
 
 <!-- ══════════════════════ FOOTER ══════════════════════ -->
 <footer>
@@ -1243,7 +1408,7 @@
 </div>
 
 <!-- ══════════════════════ SCRIPTS ════════════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── Gallery data ─────────────────────────────────── */
 const galleryData = {
     bansos:    ["images/DS-Rifki.jpg"],
@@ -1327,12 +1492,28 @@ window.addEventListener('scroll', () => {
     });
 });
 
-/* ── Reveal on Scroll ─────────────────────────────── */
+/* ── WhatsApp Popup ───────────────────────────────── */
+function updateWAPreview() {
+    const name    = document.getElementById('wa-name').value.trim() || '[Your Name]';
+    const company = document.getElementById('wa-company').value.trim() || '[Company]';
+    document.getElementById('wa-preview').innerHTML =
+        `Hello Rifki, I'm <strong>${name}</strong> from <strong>${company}</strong>. I came across your portfolio and I'm interested in your profile and CV. Would you be open to having a discussion?`;
+}
+
+function sendWAMessage() {
+    const name    = document.getElementById('wa-name').value.trim() || 'Someone';
+    const company = document.getElementById('wa-company').value.trim() || 'an organization';
+    const msg = `Hello Rifki, I'm ${name} from ${company}. I came across your portfolio and I'm interested in your profile and CV. Would you be open to having a discussion?`;
+    const url = `https://wa.me/6285155338010?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+}
+
+/* ── Close WA modal on Escape ─────────────────────── */
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        document.getElementById('wa-modal').style.display = 'none';
+    }
+});
+
 const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, { threshold: 0.1 });
-revealEls.forEach(el => io.observe(el));
-</script>
-</body>
-</html>
+const io = new Intersecti
