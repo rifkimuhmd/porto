@@ -1342,7 +1342,7 @@
                     </div>
                 </div>
 
-                <div class="contact-item contact-item--clickable" onclick="document.getElementById('wa-modal').style.display='flex'" title="Click to send WhatsApp message">
+                <div class="contact-item contact-item--clickable" data-wa-open="true" title="Click to send WhatsApp message">
                     <div class="ci-icon" style="background:rgba(37,211,102,.12);color:#25D366;"><i class="fab fa-whatsapp"></i></div>
                     <div>
                         <div class="ci-label">WhatsApp</div>
@@ -1361,8 +1361,8 @@
 
                 <div class="social-row">
                     <a href="https://www.linkedin.com/in/muhrifki/" target="_blank" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <span class="social-btn" style="cursor:pointer;" onclick="document.getElementById('wa-modal').style.display='flex'" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25D366;"></i></span>
-                    <a href="mailto:rifki.muhmd102@gmail.com" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
+                    <span class="social-btn" style="cursor:pointer;" data-wa-open="true" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25D366;"></i></span>
+                    <a href="/cdn-cgi/l/email-protection#80f2e9e6ebe9aeedf5e8ede4b1b0b2c0e7ede1e9ecaee3efed" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -1397,11 +1397,11 @@
 
         <div class="wa-field">
             <label class="wa-label" for="wa-name">Your Name</label>
-            <input class="wa-input" id="wa-name" type="text" placeholder="e.g. Sarah" oninput="updateWAPreview()">
+            <input class="wa-input" id="wa-name" type="text" placeholder="e.g. Sarah" id-input-active="true">
         </div>
         <div class="wa-field">
             <label class="wa-label" for="wa-company">Company / Institution</label>
-            <input class="wa-input" id="wa-company" type="text" placeholder="e.g. PT Tokopedia" oninput="updateWAPreview()">
+            <input class="wa-input" id="wa-company" type="text" placeholder="e.g. PT Tokopedia" id-input-active="true">
         </div>
         <div class="wa-field">
             <label class="wa-label">Message Preview</label>
@@ -1410,7 +1410,7 @@
             </div>
         </div>
 
-        <button class="btn btn--wa" onclick="sendWAMessage()">
+        <button class="btn btn--wa" id="wa-send-btn">
             <i class="fab fa-whatsapp"></i> Open in WhatsApp
         </button>
     </div>
@@ -1438,8 +1438,10 @@
 
 <!-- ══════════════════════ SCRIPTS ════════════════════ -->
 <script>
-/* ── Gallery data ─────────────────────────────────── */
-const galleryData = {
+(function() {
+
+/* ── Gallery data ───────────────────────────────── */
+var galleryData = {
     bansos:    ["images/DS-Rifki.jpg"],
     nyc:       ["images/NYC Visual.jpg"],
     kudata:    ["images/Kudata1.jpg", "images/Kudata2.png"],
@@ -1447,156 +1449,120 @@ const galleryData = {
     thesis:    ["images/T1.png", "images/T2.png"]
 };
 
-/* ── Modal / Carousel ─────────────────────────────── */
-const modal       = document.getElementById('gallery-modal');
-const slidesWrap  = document.getElementById('carousel-slides');
-const dotsWrap    = document.getElementById('carousel-dots');
-let slideIdx = 1;
+/* ── Gallery Modal ──────────────────────────────── */
+var galleryModal = document.getElementById('gallery-modal');
+var slidesWrap   = document.getElementById('carousel-slides');
+var dotsWrap     = document.getElementById('carousel-dots');
+var slideIdx     = 1;
 
-document.querySelectorAll('.project-thumb[data-project]').forEach(el => {
-    el.addEventListener('click', () => openModal(el.dataset.project));
+document.querySelectorAll('.project-thumb[data-project]').forEach(function(el) {
+    el.addEventListener('click', function() { openGallery(el.dataset.project); });
 });
+document.getElementById('modal-close').addEventListener('click', closeGallery);
+galleryModal.addEventListener('click', function(e) { if (e.target === galleryModal) closeGallery(); });
 
-document.getElementById('modal-close').onclick = closeModal;
-modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-function openModal(key) {
-    const imgs = galleryData[key];
-    if (!imgs?.length) return;
+function openGallery(key) {
+    var imgs = galleryData[key];
+    if (!imgs || !imgs.length) return;
     slidesWrap.innerHTML = '';
     dotsWrap.innerHTML = '';
-    imgs.forEach((src, i) => {
-        const div = document.createElement('div');
+    imgs.forEach(function(src, i) {
+        var div = document.createElement('div');
         div.className = 'mySlides fade';
-        div.innerHTML = `<img src="${src}" alt="Project screenshot">`;
+        var img = document.createElement('img');
+        img.src = src; img.alt = 'Project screenshot';
+        div.appendChild(img);
         slidesWrap.appendChild(div);
-        const dot = document.createElement('span');
+        var dot = document.createElement('span');
         dot.className = 'dot';
-        dot.onclick = () => currentSlide(i + 1);
+        (function(idx){ dot.addEventListener('click', function(){ currentSlide(idx+1); }); })(i);
         dotsWrap.appendChild(dot);
     });
-    modal.style.display = 'block';
+    galleryModal.style.display = 'block';
     slideIdx = 1;
     showSlides(slideIdx);
 }
-
-function closeModal() { modal.style.display = 'none'; }
-
-function plusSlides(n) { showSlides(slideIdx += n); }
-function currentSlide(n) { showSlides(slideIdx = n); }
-
+function closeGallery() { galleryModal.style.display = 'none'; }
+window.plusSlides   = function(n) { showSlides(slideIdx += n); };
+window.currentSlide = function(n) { showSlides(slideIdx = n); };
 function showSlides(n) {
-    const slides = slidesWrap.querySelectorAll('.mySlides');
-    const dots   = dotsWrap.querySelectorAll('.dot');
+    var slides = slidesWrap.querySelectorAll('.mySlides');
+    var dots   = dotsWrap.querySelectorAll('.dot');
     if (!slides.length) return;
     if (n > slides.length) slideIdx = 1;
     if (n < 1) slideIdx = slides.length;
-    slides.forEach(s => s.style.display = 'none');
-    dots.forEach(d => d.classList.remove('active-dot'));
-    slides[slideIdx - 1].style.display = 'block';
-    if (dots[slideIdx - 1]) dots[slideIdx - 1].classList.add('active-dot');
+    slides.forEach(function(s){ s.style.display = 'none'; });
+    dots.forEach(function(d){ d.classList.remove('active-dot'); });
+    slides[slideIdx-1].style.display = 'block';
+    if (dots[slideIdx-1]) dots[slideIdx-1].classList.add('active-dot');
 }
 
-/* ── Experience Tabs ──────────────────────────────── */
-document.querySelectorAll('.exp-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.exp-tab').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
+/* ── Experience Tabs ────────────────────────────── */
+document.querySelectorAll('.exp-tab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.exp-tab').forEach(function(b){ b.classList.remove('active'); });
+        document.querySelectorAll('.exp-panel').forEach(function(p){ p.classList.remove('active'); });
         btn.classList.add('active');
-        var panel = document.getElementById('panel-' + btn.dataset.tab);
-        panel.classList.add('active');
-        // Make sure all reveal items inside are visible
-        panel.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+        var panel = document.getElementById('panel-' + btn.getAttribute('data-tab'));
+        if (panel) {
+            panel.classList.add('active');
+            panel.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+        }
     });
 });
 
-/* ── Scroll Spy ───────────────────────────────────── */
-const navLinks = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-    let cur = '';
-    document.querySelectorAll('section').forEach(s => {
-        if (window.scrollY >= s.offsetTop - 100) cur = s.id;
-    });
-    navLinks.forEach(a => {
-        a.classList.remove('active');
-        if (a.getAttribute('href') === '#' + cur) a.classList.add('active');
+/* ── WhatsApp Modal ─────────────────────────────── */
+// Open triggers
+document.querySelectorAll('[data-wa-open]').forEach(function(el){
+    el.addEventListener('click', function(){
+        document.getElementById('wa-modal').style.display = 'flex';
     });
 });
+// Close overlay click
+var waOverlay = document.getElementById('wa-modal');
+waOverlay.addEventListener('click', function(e){
+    if (e.target === waOverlay) waOverlay.style.display = 'none';
+});
 
-/* ── WhatsApp Popup ───────────────────────────────── */
 function updateWAPreview() {
-    const name    = document.getElementById('wa-name').value.trim() || '[Your Name]';
-    const company = document.getElementById('wa-company').value.trim() || '[Company]';
+    var nameVal    = (document.getElementById('wa-name').value    || '').trim();
+    var companyVal = (document.getElementById('wa-company').value || '').trim();
+    var nameShow    = nameVal    || '[Your Name]';
+    var companyShow = companyVal || '[Company]';
     document.getElementById('wa-preview').innerHTML =
-        `Hello Rifki, I'm <strong>${name}</strong> from <strong>${company}</strong>. I came across your portfolio and I'm interested in your profile and CV. Would you be open to having a discussion?`;
+        "Hello Rifki, I'm <strong>" + nameShow + "</strong> from <strong>" + companyShow +
+        "</strong>. I came across your portfolio and I'm interested in your profile and CV. Would you be open to having a discussion?";
 }
 
 function sendWAMessage() {
-    var name    = document.getElementById('wa-name').value.trim() || 'Someone';
-    var company = document.getElementById('wa-company').value.trim() || 'an organization';
-    var msg = "Hello Rifki, I'm " + name + " from " + company + ". I came across your portfolio and I'm interested in your profile and CV. Would you be open to having a discussion?";
+    var name    = (document.getElementById('wa-name').value    || '').trim() || 'Someone';
+    var company = (document.getElementById('wa-company').value || '').trim() || 'an organization';
+    var msg = "Hello Rifki, I'm " + name + " from " + company +
+              ". I came across your portfolio and I'm interested in your profile and CV. Would you be open to having a discussion?";
     var url = "https://wa.me/6285155338010?text=" + encodeURIComponent(msg);
     document.getElementById('wa-modal').style.display = 'none';
-    window.open(url, '_blank');
+    var link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(function(){ document.body.removeChild(link); }, 500);
 }
 
+document.getElementById('wa-name').addEventListener('input', updateWAPreview);
+document.getElementById('wa-company').addEventListener('input', updateWAPreview);
+document.getElementById('wa-send-btn').addEventListener('click', sendWAMessage);
 
-/* Close WA modal on Escape */
-document.addEventListener('keydown', e => {
+/* ── Escape closes modals ───────────────────────── */
+document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         document.getElementById('gallery-modal').style.display = 'none';
         document.getElementById('wa-modal').style.display = 'none';
     }
 });
 
-/* Reveal on Scroll - IntersectionObserver */
-(function() {
-    var reveals = document.querySelectorAll('.reveal');
-    
-    // Immediately show elements already in viewport (critical for hero)
-    function checkVisible() {
-        reveals.forEach(function(el) {
-            var rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight + 60) {
-                el.classList.add('visible');
-            }
-        });
-    }
-    
-    // Run on load immediately
-    checkVisible();
-    
-    // Also run after a tiny delay for file:// protocol
-    setTimeout(checkVisible, 100);
-    setTimeout(checkVisible, 300);
-    
-    // Use IntersectionObserver for elements further down page
-    if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-                if (e.isIntersecting) {
-                    e.target.classList.add('visible');
-                    io.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-        
-        reveals.forEach(function(el) {
-            if (!el.classList.contains('visible')) {
-                io.observe(el);
-            }
-        });
-    } else {
-        // Fallback: show everything
-        reveals.forEach(function(el) { el.classList.add('visible'); });
-    }
-    
-    // Scroll listener fallback
-    window.addEventListener('scroll', checkVisible, { passive: true });
-})();
-
-/* Scroll Spy */
+/* ── Scroll Spy ─────────────────────────────────── */
 var navLinks = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', function() {
     var cur = '';
@@ -1609,6 +1575,28 @@ window.addEventListener('scroll', function() {
     });
 }, { passive: true });
 
+/* ── Reveal on Scroll ───────────────────────────── */
+var reveals = document.querySelectorAll('.reveal');
+function checkVisible() {
+    reveals.forEach(function(el) {
+        if (el.getBoundingClientRect().top < window.innerHeight + 80)
+            el.classList.add('visible');
+    });
+}
+checkVisible();
+setTimeout(checkVisible, 150);
+setTimeout(checkVisible, 500);
+window.addEventListener('scroll', checkVisible, { passive: true });
+if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+    }, { threshold: 0.05 });
+    reveals.forEach(function(el){ if (!el.classList.contains('visible')) io.observe(el); });
+}
+
+})();
 </script>
 </body>
 </html>
