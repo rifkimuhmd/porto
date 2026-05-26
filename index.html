@@ -29,16 +29,16 @@
         --panel2:      #121d32;
         --card:        #16223a;
 
-        --accent:      #4F8EF7;
-        --accent-dim:  rgba(79,142,247,0.08);
-        --accent-mid:  rgba(79,142,247,0.18);
-        --accent-hi:   rgba(79,142,247,0.38);
-        --accent-glow: rgba(79,142,247,0.28);
-        --accent-hover:#70A8FF;
+        --accent:      #28c0f8;
+        --accent-dim:  rgba(40,192,248,0.08);
+        --accent-mid:  rgba(40,192,248,0.18);
+        --accent-hi:   rgba(40,192,248,0.38);
+        --accent-glow: rgba(40,192,248,0.28);
+        --accent-hover:#55d0ff;
 
-        --border:      rgba(79,142,247,0.08);
-        --border-mid:  rgba(79,142,247,0.16);
-        --border-hi:   rgba(79,142,247,0.36);
+        --border:      rgba(40,192,248,0.08);
+        --border-mid:  rgba(40,192,248,0.16);
+        --border-hi:   rgba(40,192,248,0.36);
 
         --text:        #C8D8F0;
         --text-hi:     #E8F0FF;
@@ -53,9 +53,13 @@
         --section-alt: #0a0f1e;
 
         --scanline: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.04) 2px,rgba(0,0,0,0.04) 4px);
-        --grid-line: rgba(79,142,247,0.022);
+        --grid-line: rgba(40,192,248,0.022);
         --photo-filter: grayscale(15%) contrast(1.05) brightness(0.92);
         --img-filter: brightness(.85) saturate(.9);
+
+        /* switch */
+        --sw-track: #1a2a3a;
+        --sw-thumb: #28c0f8;
     }
 
     /* ══════════════════════════════════
@@ -95,6 +99,10 @@
         --grid-line: rgba(22,163,74,0.04);
         --photo-filter: grayscale(5%) contrast(1.02) brightness(1.0);
         --img-filter: brightness(1) saturate(1);
+
+        /* switch */
+        --sw-track: #d1e7dd;
+        --sw-thumb: #16A34A;
     }
 
     :root {
@@ -143,24 +151,61 @@
     .section { padding: 96px 0; position: relative; }
     .section--alt { background: var(--section-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 
-    /* ── THEME TOGGLE ── */
-    .theme-toggle {
-        width: 36px; height: 36px;
-        border-radius: var(--radius);
-        border: 1px solid var(--border-mid);
-        background: var(--panel);
-        color: var(--muted2);
-        display: flex; align-items: center; justify-content: center;
+    /* ── THEME SWITCH ── */
+    .theme-switch {
+        display: flex;
+        align-items: center;
+        gap: 6px;
         cursor: pointer;
-        font-size: .9rem;
-        transition: all .2s;
         flex-shrink: 0;
+        user-select: none;
     }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-    [data-theme="dark"]  .icon-sun  { display: block; }
-    [data-theme="dark"]  .icon-moon { display: none;  }
-    [data-theme="light"] .icon-sun  { display: none;  }
-    [data-theme="light"] .icon-moon { display: block; }
+    .theme-switch-track {
+        position: relative;
+        width: 52px;
+        height: 26px;
+        background: var(--sw-track);
+        border: 1px solid var(--border-mid);
+        border-radius: 13px;
+        transition: background .3s, border-color .3s;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+    .theme-switch-track::after {
+        /* glow ring on dark */
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 13px;
+        box-shadow: inset 0 0 6px rgba(40,192,248,0.18);
+        pointer-events: none;
+        transition: box-shadow .3s;
+    }
+    [data-theme="light"] .theme-switch-track::after {
+        box-shadow: inset 0 0 6px rgba(22,163,74,0.15);
+    }
+    .theme-switch-thumb {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 18px;
+        height: 18px;
+        background: var(--sw-thumb);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .65rem;
+        color: #fff;
+        transition: left .28s cubic-bezier(.4,0,.2,1), background .3s, box-shadow .3s;
+        box-shadow: 0 0 8px var(--accent-glow);
+    }
+    [data-theme="dark"]  .theme-switch-thumb { left: 3px;  }
+    [data-theme="light"] .theme-switch-thumb { left: 29px; background: var(--sw-thumb); box-shadow: 0 0 8px var(--accent-glow); }
+    [data-theme="dark"]  .icon-sun  { display: none; }
+    [data-theme="dark"]  .icon-moon { display: block; }
+    [data-theme="light"] .icon-sun  { display: block; }
+    [data-theme="light"] .icon-moon { display: none; }
 
     /* ── CHIP / TAGS ── */
     .chip {
@@ -649,10 +694,15 @@
                 <div class="status-dot"></div>
                 <span>open_to_work</span>
             </div>
-            <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme">
-                <i class="fas fa-sun icon-sun"></i>
-                <i class="fas fa-moon icon-moon"></i>
-            </button>
+            <!-- THEME SWITCH -->
+            <div class="theme-switch" id="theme-toggle" role="button" tabindex="0" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
+                <div class="theme-switch-track">
+                    <div class="theme-switch-thumb">
+                        <i class="fas fa-moon icon-moon"></i>
+                        <i class="fas fa-sun icon-sun"></i>
+                    </div>
+                </div>
+            </div>
             <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
@@ -677,7 +727,7 @@
                 <p class="hero-prompt"><span class="prompt-prefix">$</span> <span>whoami --analyst --jakarta</span></p>
                 <h1 class="hero-name">Muhammad<br><span class="hero-name-accent">Rifki</span></h1>
                 <p class="hero-role">Data &amp; Business Analyst &nbsp;<span>// Dashboard · Automation · BI</span></p>
-                <p class="hero-desc">Data Analyst dengan pengalaman di procurement, e-commerce, dan pendidikan — spesialis dalam dashboard automation, SQL, Python, dan business intelligence yang bikin tim kerja lebih cepat dan keputusan lebih tepat.</p>
+                <p class="hero-desc">Data Analyst with experience in procurement, e-commerce, and education — specializing in dashboard automation, SQL, Python, and business intelligence to help teams move faster and make better decisions.</p>
                 <div class="hero-actions">
                     <a href="#projects" class="btn btn--primary"><i class="fas fa-chart-line"></i> view_projects()</a>
                     <a href="#contact"  class="btn btn--ghost"><i class="fas fa-paper-plane"></i> contact_me()</a>
@@ -730,8 +780,8 @@
         <div class="about-grid">
             <div class="about-bio reveal" style="transition-delay:.08s">
                 <h2 class="section-title" style="margin-bottom:20px;">Turning data into<br><span>actionable insight</span></h2>
-                <p>Fresh graduate Informatika Universitas Gunadarma dengan track record di tiga industri berbeda: indirect procurement (Super Indo), e-commerce analytics (RedDoorz), dan pendidikan (Al-Izhar). Dari setiap peran, gue bawa satu hal: sistem yang lebih rapi dan keputusan yang lebih cepat.</p>
-                <p>Committed to continuous learning — saat ini fokus di dashboard automation, SQL optimization, dan membangun pipeline data yang scalable untuk mendukung strategic planning.</p>
+                <p>Fresh graduate in Informatics from Universitas Gunadarma with a track record across three different industries: indirect procurement (Super Indo), e-commerce analytics (RedDoorz), and education (Al-Izhar). From each role, the focus has been consistent: cleaner systems and faster decisions.</p>
+                <p>Committed to continuous learning — currently focused on dashboard automation, SQL optimization, and building scalable data pipelines to support strategic planning.</p>
             </div>
             <div class="reveal" style="transition-delay:.16s">
                 <div class="role-table">
@@ -900,8 +950,8 @@
         </div>
         <div class="exp-panel" id="panel-org">
             <div class="timeline">
-                <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-company">BEM FTI Universitas Gunadarma</div><div class="tl-date" style="font-family:var(--font-mono);font-size:.65rem;color:var(--muted);margin-bottom:12px;">2 years 8 months total</div><ul class="tl-list"><li><strong>Kepala Bidang Kemahasiswaan</strong> – Agt 2024 – Jul 2025</li><li><strong>Wakil Kepala Dept. Advokasi Kesejahteraan Mahasiswa</strong> – Sep 2023 – Jul 2024</li><li><strong>Staff Advokasi Kesejahteraan Mahasiswa</strong> – Des 2022 – Agt 2023</li></ul></div>
-                <div class="tl-item reveal" style="transition-delay:.1s"><div class="tl-dot"></div><div class="tl-company">SNAP Photography Gunadarma</div><div class="tl-date" style="font-family:var(--font-mono);font-size:.65rem;color:var(--muted);margin-bottom:12px;">2 years 1 month total</div><ul class="tl-list"><li><strong>Bendahara</strong> – Sep 2023 – Sep 2024</li><li><strong>Kepala Kesekretariatan</strong> – Sep 2022 – Agt 2023</li></ul></div>
+                <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-company">BEM FTI Universitas Gunadarma</div><div class="tl-date" style="font-family:var(--font-mono);font-size:.65rem;color:var(--muted);margin-bottom:12px;">2 years 8 months total</div><ul class="tl-list"><li><strong>Head of Student Affairs Division</strong> – Aug 2024 – Jul 2025</li><li><strong>Deputy Head, Student Welfare Advocacy Dept.</strong> – Sep 2023 – Jul 2024</li><li><strong>Staff, Student Welfare Advocacy</strong> – Dec 2022 – Aug 2023</li></ul></div>
+                <div class="tl-item reveal" style="transition-delay:.1s"><div class="tl-dot"></div><div class="tl-company">SNAP Photography Gunadarma</div><div class="tl-date" style="font-family:var(--font-mono);font-size:.65rem;color:var(--muted);margin-bottom:12px;">2 years 1 month total</div><ul class="tl-list"><li><strong>Treasurer</strong> – Sep 2023 – Sep 2024</li><li><strong>Head of Secretariat</strong> – Sep 2022 – Aug 2023</li></ul></div>
             </div>
         </div>
     </div>
@@ -913,7 +963,7 @@
         <p class="section-label reveal">learning_path</p>
         <h2 class="section-title reveal" style="transition-delay:.05s">Education &amp; <span>Certification</span></h2>
         <div class="edu-grid">
-            <div class="edu-card reveal" style="transition-delay:.05s"><div class="edu-card-head"><div class="edu-icon"><i class="fas fa-university"></i></div><div class="edu-school">Universitas Gunadarma</div></div><div class="edu-card-body"><div class="edu-degree">S1 Informatika</div><div class="edu-detail">Sep 2021 – Sep 2025<br>GPA 3.65 / 4.00<br>Data Structures · Database Systems · SQL</div></div></div>
+            <div class="edu-card reveal" style="transition-delay:.05s"><div class="edu-card-head"><div class="edu-icon"><i class="fas fa-university"></i></div><div class="edu-school">Universitas Gunadarma</div></div><div class="edu-card-body"><div class="edu-degree">S1 Informatics</div><div class="edu-detail">Sep 2021 – Sep 2025<br>GPA 3.65 / 4.00<br>Data Structures · Database Systems · SQL</div></div></div>
             <div class="edu-card reveal" style="transition-delay:.08s"><div class="edu-card-head"><div class="edu-icon"><i class="fas fa-shield-alt"></i></div><div class="edu-school">BNSP</div></div><div class="edu-card-body"><div class="edu-degree">Data Science Certification</div><div class="edu-detail">Jul 2025 · Python · Google Colab · CRISP-DM</div><a href="https://drive.google.com/file/d/18AXBFgXV-k91VakmsSx-xEXmr64clLDL/view" target="_blank" class="cert-btn"><i class="fas fa-external-link-alt"></i> view_certificate</a></div></div>
             <div class="edu-card reveal" style="transition-delay:.12s"><div class="edu-card-head"><div class="edu-icon"><i class="fas fa-laptop-code"></i></div><div class="edu-school">RevoU Kampus Merdeka</div></div><div class="edu-card-body"><div class="edu-degree">Data Analytics &amp; Software Dev with AI</div><div class="edu-detail">Feb – Jun 2024 · Looker Studio · BigQuery</div><a href="https://drive.google.com/file/d/1pgmjaaeDteSvfYrKcF4m_bjFJwXdLFiC/view?usp=sharing" target="_blank" class="cert-btn"><i class="fas fa-external-link-alt"></i> view_certificate</a></div></div>
             <div class="edu-card reveal" style="transition-delay:.16s"><div class="edu-card-head"><div class="edu-icon"><i class="fas fa-certificate"></i></div><div class="edu-school">G2Academy</div></div><div class="edu-card-body"><div class="edu-degree">Basic Python, SQL &amp; Data Visualization</div><div class="edu-detail">Sep 2023 · Python · SQL · Tableau</div><a href="https://g2labcms.s3-ap-southeast-1.amazonaws.com/certificates/1694481382387-certificate16928391602562189871.png" target="_blank" class="cert-btn"><i class="fas fa-external-link-alt"></i> view_certificate</a></div></div>
@@ -928,7 +978,7 @@
         <h2 class="section-title reveal" style="transition-delay:.05s">Let's <span>Connect</span></h2>
         <div class="contact-wrap">
             <div class="reveal" style="transition-delay:.1s">
-                <p class="contact-cta">Terbuka untuk peluang baru, kolaborasi, dan tantangan data yang menarik. Jangan ragu untuk reach out!</p>
+                <p class="contact-cta">Open to new opportunities, collaborations, and interesting data challenges. Don't hesitate to reach out!</p>
                 <div class="contact-item ci--email" id="email-item" title="Click to copy email">
                     <div class="ci-icon"><i class="fas fa-envelope"></i></div>
                     <div style="flex:1;min-width:0;"><div class="ci-label">email <span class="ci-hint">// click to copy</span></div><div class="ci-value">rifki.muhmd102@gmail.com</div></div>
@@ -1009,12 +1059,14 @@ var themeBtn = document.getElementById('theme-toggle');
 var saved = localStorage.getItem('theme') || 'dark';
 html.setAttribute('data-theme', saved);
 
-themeBtn.addEventListener('click', function(){
+function toggleTheme() {
     var cur = html.getAttribute('data-theme');
     var next = cur === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
-});
+}
+themeBtn.addEventListener('click', toggleTheme);
+themeBtn.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleTheme(); } });
 
 /* ── Gallery data ── */
 var galleryData = {
